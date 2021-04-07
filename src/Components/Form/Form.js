@@ -14,18 +14,51 @@ class Form extends Component {
 
   handleChange = (data, dataCategory) => {
     this.setState({ [dataCategory]: data})
-    console.log(this.state)
   }
 
+  submitReservation = (event) => {
+    event.preventDefault()
+    const reminder = this.state
+    this.props.addReservation(reminder)
+    this.clearInputs()
+  }
+
+  clearInputs = () => {
+    this.setState({ name: '', date: '', time: '', number: '' })
+  }
 
 render() {
   return (
     <form>
-      <input placeholder="Name" onChange={(event) => this.handleChange(event.target.value, 'name')}></input>
-      <input placeholder="Date (mm/dd)" onChange={(event) => this.handleChange(event.target.value, 'date')}></input>
-      <input placeholder="Time" onChange={(event) => this.handleChange(event.target.value, 'time')}></input>
-      <input placeholder="Number of Guests" onChange={(event) => this.handleChange(event.target.value, 'number')}></input>
-      <button>Make Reservation</button>
+      <input 
+        placeholder="Name" 
+        type="text" 
+        onChange={(event) => this.handleChange(event.target.value, 'name')}
+        value={this.state.name}
+      >
+      </input>
+      <input 
+        placeholder="Date (mm/dd)" 
+        type="text" 
+        onChange={(event) => this.handleChange(event.target.value, 'date')}
+        value={this.state.date}
+      >
+      </input>
+      <input 
+        placeholder="Time" 
+        type="text" 
+        onChange={(event) => this.handleChange(event.target.value, 'time')}
+        value={this.state.time}
+      >
+      </input>
+      <input 
+        placeholder="Number of Guests" 
+        type="number" 
+        onChange={(event) => this.handleChange(event.target.value, 'number')}
+        value={this.state.number}
+      >
+      </input>
+      <button onClick={(event) => this.submitReservation(event)} >Make Reservation</button>
     </form>
   )
 
