@@ -31,6 +31,7 @@ render() {
   return (
     <form>
       <input 
+        id="nameField"
         placeholder="Name" 
         type="text" 
         onChange={(event) => this.handleChange(event.target.value, 'name')}
@@ -38,20 +39,23 @@ render() {
       >
       </input>
       <input 
+        id="dateField"
         placeholder="Date (mm/dd)" 
         type="text" 
         onChange={(event) => this.handleChange(event.target.value, 'date')}
         value={this.state.date}
       >
       </input>
-      <input 
+      <input
+        id="timeField"
         placeholder="Time" 
         type="text" 
         onChange={(event) => this.handleChange(event.target.value, 'time')}
         value={this.state.time}
       >
       </input>
-      <input 
+      <input
+        id="numberField"
         placeholder="Number of Guests" 
         type="number" 
         onChange={(event) => this.handleChange(event.target.value, 'number')}
