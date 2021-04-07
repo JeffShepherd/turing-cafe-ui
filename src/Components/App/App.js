@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import '../ReDashboard/ReDashboard.js'
 import './App.css';
+
 
 class App extends Component {
   constructor() {
     super()
 
     this.state = {
-      reminders: []
+      reservations: []
     }
 
   }
@@ -14,7 +16,7 @@ class App extends Component {
   componentDidMount() {
     fetch("http://localhost:3001/api/v1/reservations")
       .then((response) => response.json())
-      .then((remindersData) => this.setState({ reminders: remindersData}))
+      .then((reservationData) => this.setState({ reservations: reservationData}))
       .catch((error) => console.log(error))
   }
 
@@ -23,12 +25,10 @@ class App extends Component {
     return (
       <div className="App">
         <h1 className='app-title'>Turing Cafe Reservations</h1>
-        <div className='resy-form'>
+        {/* <div className='resy-form'>
 
-        </div>
-        <div className='resy-container'>
-          
-        </div>
+        </div> */}
+          <ResDashboard reservations={this.state.reservations} className='resy-container' />
       </div>
     )
   }
