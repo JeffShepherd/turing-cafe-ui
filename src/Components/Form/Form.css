@@ -1,0 +1,23 @@
+form {
+  width: 90%;
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 2%;
+  height: 3%;
+}
+
+form > input, button {
+  width: 15%;
+  height: 100%;
+}
+
+form > input {
+  border: none;
+  padding: 0;
+  padding-left: 4px;
+}
+
+form > button {
+  background-color: teal;
+  color: white;
+}
