@@ -5,6 +5,7 @@ import './ResDashboard.css'
 const ResDashboard = ({ reservations }) =>{
   const reservationCards = reservations.map((reservation) => {
     return <Reservation 
+              key={reservation.id} 
               id={reservation.id} 
               name={reservation.name} 
               date={reservation.date} 
@@ -15,7 +16,7 @@ const ResDashboard = ({ reservations }) =>{
 
 
 
-  return <section>{reservationCards}</section>
+  return <section className='resy-container'>{reservationCards}</section>
 }
 
 
