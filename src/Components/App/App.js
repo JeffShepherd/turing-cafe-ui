@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../ReDashboard/ReDashboard.js'
+import ResDashboard from '../ResDashboard/ResDashboard.js'
 import './App.css';
 
 
