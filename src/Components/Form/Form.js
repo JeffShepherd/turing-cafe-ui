@@ -62,7 +62,8 @@ render() {
         value={this.state.number}
       >
       </input>
-      <button onClick={(event) => this.submitReservation(event)} >Make Reservation</button>
+      <button className="submit-button"
+      onClick={(event) => this.submitReservation(event)} >Make Reservation</button>
     </form>
   )
 

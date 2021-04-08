@@ -1,7 +1,20 @@
 describe('Turing Cafe', () => {
   // Write tests covering what should be displayed on the page when the user first visits
   beforeEach(() => {
-    cy.visit('http://localhost:3000/')
+
+    cy.intercept({
+      method: 'GET',
+      url: 'http://localhost:3001/api/v1/reservations'
+    },
+      {
+        statusCode: 201,
+        body: [
+          { 'id': 1, 'name': 'Coleslaw', 'date': '8/8', 'time': '7:00', 'number': 3 },
+          { 'id': 2, 'name': 'Fridge', 'date': '10/08', 'time': '10:30', 'number': 2 },
+          { 'id': 3, 'name': 'Smith', 'date': '03/08', 'time': '12:30', 'number': 1 }
+        ]
+      });
+    cy.visit('http://localhost:3000');
   });
 
   it('should display the app name on load', () => {
@@ -14,12 +27,12 @@ describe('Turing Cafe', () => {
   })
 
   it('should have a section contaning all of the reservations', () => {
-    cy.get('section').children().should('have.length', 9)
+    cy.get('section').children().should('have.length', 3)
   })
 
   it('should have cards reflecting four data points', () => {
     cy.get('article[id=1]')
-    .contains('Christie' && '12/29' && '7:00' && 12)    
+    .contains('Coleslaw' && '8/8' && '7:00' && 3)    
   })
 
   // Write a test that checks that when data is put into the form, the value is reflected in that form input
@@ -31,6 +44,16 @@ describe('Turing Cafe', () => {
 
   // Write a test to check the user flow of adding a new reservation to the page
   it('should reflect a new reservation card when a user submits one', () => {
+    cy.intercept({
+      method: 'POST',
+      url: 'http://localhost:3001/api/v1/reservations'
+    },
+      {
+        statusCode: 201,
+        body:
+          { 'id': 99, 'name': 'Jeff', 'date': '6/6', 'time': '7:00', 'number': 2 },
+      });
+
     cy.get('input[id=nameField]')
     .type('Jeff')
     cy.get('input[id=dateField]')
@@ -39,11 +62,31 @@ describe('Turing Cafe', () => {
     .type('6:00')
     cy.get('input[id=numberField]')
     .type(2)
-    cy.get('button').click()
+    cy.get('.submit-button').click()
     cy.get('section')
-    .contains('Jeff' && '6/6' && '6:00 pm' && 'Number of guests: 2')
-
+    .contains('Jeff')
   })
+
+
+
+it('should remove a reservation when a user clicks the cancel button', () => {
+
+  
+  cy.intercept({
+    method: 'DELETE',
+    url: 'http://localhost:3001/api/v1/reservations/1'
+  },
+    {
+      statusCode: 201,
+      body: [
+        { 'id': 2, 'name': 'Fridge', 'date': '10/08', 'time': '10:30', 'number': 2 },
+        { 'id': 3, 'name': 'Smith', 'date': '03/08', 'time': '12:30', 'number': 1 }
+      ]
+    });
+
+  cy.get('button[id=1]').click()
+  cy.get('section').children().should('have.length', '2')
+})
 
 })
 

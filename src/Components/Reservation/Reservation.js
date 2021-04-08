@@ -4,7 +4,7 @@ import './Reservation.css'
 const Reservation = ({ id, name, date, time, number, deleteReservation}) => {
 
 return (
-  <article className="res-card">
+  <article id={id} className="res-card">
     <h3>{name}</h3>
     <p>{date}</p>
     <p>{time} pm</p>
