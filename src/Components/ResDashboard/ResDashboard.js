@@ -2,7 +2,7 @@ import React from 'react'
 import Reservation from '../Reservation/Reservation.js'
 import './ResDashboard.css'
 
-const ResDashboard = ({ reservations }) =>{
+const ResDashboard = ({ reservations, deleteReservation }) =>{
   const reservationCards = reservations.map((reservation) => {
     return <Reservation 
               key={reservation.id} 
@@ -10,7 +10,8 @@ const ResDashboard = ({ reservations }) =>{
               name={reservation.name} 
               date={reservation.date} 
               time={reservation.time} 
-              number={reservation.number}  
+              number={reservation.number}
+              deleteReservation={deleteReservation}  
             />
   })
 
